@@ -21,6 +21,13 @@ class ViewController: UIViewController {
             case .failure(let error): print(error)
             }
         }
+        
+        movieClient.fetchMoviesWithGenre(withQuery: 99) { result in
+            switch result {
+            case .success(let movies): print(movies)
+            case .failure(let error) : print(error)
+            }
+        }
       
         
     }

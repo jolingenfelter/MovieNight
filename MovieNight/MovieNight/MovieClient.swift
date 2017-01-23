@@ -34,7 +34,7 @@ enum MovieDatabase: Endpoint {
             
             case .Movies:
             
-                return URL(string: "\(baseURL)/genre\(query!)/movies?api_key=\(apiKey)")!
+                return URL(string: "\(baseURL)/genre/\(query!)/movies?api_key=\(apiKey)")!
             
         }
     }
