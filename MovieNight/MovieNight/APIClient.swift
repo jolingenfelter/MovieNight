@@ -26,7 +26,7 @@ protocol jsonDecodable {
     init?(json: [String : AnyObject])
 }
 
-protocol Endpint {
+protocol Endpoint {
     var baseURL: URL { get }
     var path: String { get }
     var request: URLRequest { get }

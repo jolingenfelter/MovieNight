@@ -13,6 +13,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let movieClient = MovieClient()
+        movieClient.fetchGenres { result in
+            switch result {
+            case .success(let genres): print("\(genres)")
+            case .failure(let error): print("\(error)")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
