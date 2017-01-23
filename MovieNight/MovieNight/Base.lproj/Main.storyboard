@@ -132,10 +132,10 @@
             </objects>
             <point key="canvasLocation" x="1812" y="125"/>
         </scene>
-        <!--Movie Detail View Controller-->
+        <!--Movie Results Detail View Controller-->
         <scene sceneID="RlN-7E-NoB">
             <objects>
-                <viewController id="sdr-fn-lOW" customClass="MovieDetailViewController" sceneMemberID="viewController">
+                <viewController id="sdr-fn-lOW" customClass="MovieResultsDetailViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tLl-Pe-UpH"/>
                         <viewControllerLayoutGuide type="bottom" id="Wvv-rw-Ycj"/>
@@ -245,10 +245,10 @@
             </objects>
             <point key="canvasLocation" x="2570" y="126"/>
         </scene>
-        <!--Results View Controller-->
+        <!--Movie Results List View Controller-->
         <scene sceneID="OSk-Bj-cik">
             <objects>
-                <viewController id="5vm-2a-9Ys" customClass="ResultsViewController" sceneMemberID="viewController">
+                <viewController id="5vm-2a-9Ys" customClass="MovieResultsListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="brB-qd-1iS"/>
                         <viewControllerLayoutGuide type="bottom" id="zrh-ET-kPD"/>
