@@ -28,8 +28,6 @@ protocol jsonDecodable {
 
 protocol Endpoint {
     var baseURL: URL { get }
-    var path: String { get }
-    var request: URLRequest { get }
 }
 
 protocol APIClient {

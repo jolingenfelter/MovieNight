@@ -21,3 +21,23 @@ extension Genre: jsonDecodable {
         name = json["name"] as? String
     }
 }
+
+// MARK: Movies
+
+struct Movie {
+    let title: String?
+    let releaseDate: String?
+    let overview: String?
+    let genre: Genre?
+    let id: Int?
+}
+
+extension Movie: jsonDecodable {
+    init?(json: [String : AnyObject]) {
+        title = json["title"] as? String
+        releaseDate = json["release_date"] as? String
+        overview = json["overview"] as? String
+        genre = json["genre"] as? Genre
+        id = json["id"] as? Int
+    }
+}

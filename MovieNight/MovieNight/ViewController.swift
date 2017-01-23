@@ -17,10 +17,12 @@ class ViewController: UIViewController {
         let movieClient = MovieClient()
         movieClient.fetchGenres { result in
             switch result {
-            case .success(let genres): print("\(genres)")
-            case .failure(let error): print("\(error)")
+            case .success(let genres): print(genres)
+            case .failure(let error): print(error)
             }
         }
+      
+        
     }
 
     override func didReceiveMemoryWarning() {
