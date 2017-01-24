@@ -8,18 +8,25 @@
 
 import UIKit
 
-class MovieResultsListViewController: UIViewController {
+class MovieResultsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: Variables
     var resultsList: [Movie] = []
     
     //MARK: Outlets
+    @IBOutlet weak var tableView: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        sortThroughResults()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sortThroughResults()
 
-        // Do any additional setup after loading the view.
+        // TableView
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
     
     func sortThroughResults() {
@@ -33,15 +40,23 @@ class MovieResultsListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: TableView
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    */
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return resultsList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
 
 }
