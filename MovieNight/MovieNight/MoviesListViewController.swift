@@ -15,6 +15,11 @@ class MoviesListViewController: UIViewController {
     var moviesArray: [Movie]?
     let selectedMoviesArray : [Movie] = []
     var numberSelected = 0
+    
+    // MARK: Outlets
+    @IBOutlet weak var numberSelectedLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +29,8 @@ class MoviesListViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+
     }
     
 
