@@ -12,6 +12,11 @@ class GenreTableViewCell: UITableViewCell {
     
     @IBOutlet weak var checkBox: UIImageView!
     @IBOutlet weak var genreLabel: UILabel!
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.selectionStyle = UITableViewCellSelectionStyle.none
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +25,11 @@ class GenreTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        if self.isSelected {
+           self.checkBox.image = UIImage(named: "selected") 
+        }
+        
     }
 
 }
