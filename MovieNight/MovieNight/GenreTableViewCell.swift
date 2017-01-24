@@ -28,6 +28,8 @@ class GenreTableViewCell: UITableViewCell {
         
         if self.isSelected {
            self.checkBox.image = UIImage(named: "selected") 
+        } else {
+            self.checkBox.image = UIImage(named: "notSelected")
         }
         
     }

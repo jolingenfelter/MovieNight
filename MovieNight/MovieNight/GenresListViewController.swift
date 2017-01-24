@@ -28,6 +28,7 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         //TableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.allowsMultipleSelection = true
     }
     
     // MARK: NavigationBar
@@ -101,7 +102,7 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    
     }
     
 }
