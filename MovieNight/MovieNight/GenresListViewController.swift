@@ -95,14 +95,23 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         if let genresArray = genresArray {
             let genre = genresArray[indexPath.row]
             cell.genreLabel.text = genre.name
-            cell.checkBox.image = UIImage(named: "notSelected")
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if numberSelected >= 5 {
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            numberSelected += 1
+        }
+        
+    }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        numberSelected -= 1
     }
     
 }
