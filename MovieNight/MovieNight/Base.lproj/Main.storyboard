@@ -36,6 +36,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="viewResultsWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rc8-XQ-Mma"/>
                                     <segue destination="5vm-2a-9Ys" kind="show" id="0Ui-vg-Jw8"/>
                                 </connections>
                             </button>
@@ -47,7 +48,7 @@
                                 </constraints>
                                 <state key="normal" image="bubble-empty"/>
                                 <connections>
-                                    <segue destination="fot-Rm-ItU" kind="show" id="iC0-Ry-qfW"/>
+                                    <action selector="user1ButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u35-fq-IC8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MmQ-4r-sTY">
@@ -58,7 +59,7 @@
                                 </constraints>
                                 <state key="normal" image="bubble-empty"/>
                                 <connections>
-                                    <segue destination="fot-Rm-ItU" kind="show" id="e25-Sq-60F"/>
+                                    <action selector="user2ButtonPressedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="12w-M2-RYX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,7 +77,14 @@
                             <constraint firstItem="MmQ-4r-sTY" firstAttribute="top" secondItem="Tgx-tN-Ldo" secondAttribute="top" id="s4b-y0-tai"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie Night" id="38N-ab-8Pl"/>
+                    <navigationItem key="navigationItem" title="Movie Night" id="38N-ab-8Pl">
+                        <barButtonItem key="rightBarButtonItem" title="Reset" id="mDf-Mt-CHQ">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="resetSelectionsWithSender:" destination="BYZ-38-t0r" id="dga-ez-z6M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -91,11 +99,11 @@
                         <viewControllerLayoutGuide type="bottom" id="h9I-KD-38q"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="G4O-UO-LIe">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bTJ-02-KAe">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GenreCell" id="3LA-l5-FVD" customClass="GenreTableViewCell" customModule="MovieNight" customModuleProvider="target">
@@ -137,7 +145,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4f-Cr-w6u">
-                                <rect key="frame" x="0.0" y="553" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NumberSelected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAO-yC-0ds">
                                         <rect key="frame" x="122.5" y="15" width="129" height="21"/>
@@ -397,7 +405,4 @@
         <image name="bg-iphone6" width="751" height="1335"/>
         <image name="bubble-empty" width="123" height="97"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="iC0-Ry-qfW"/>
-    </inferredMetricsTieBreakers>
 </document>

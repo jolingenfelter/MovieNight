@@ -11,10 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     // MARK: Outlets
-    @IBOutlet weak var user1Button: UIButton!
-    @IBOutlet weak var user2Button: UIButton!
-    @IBOutlet weak var resetButton: UIBarButtonItem!
-    @IBOutlet weak var viewResultsButton: UIButton!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +23,22 @@ class HomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    @IBAction func user1ButtonPressed(sender: UIButton) {
+    
+    }
+    
+    @IBAction func user2ButtonPressed(sender: UIButton) {
+        
+    }
+    
+    @IBAction func resetSelections(sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBAction func viewResults(sender: UIButton) {
+        
+    }
 
 }
 
