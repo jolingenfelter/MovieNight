@@ -16,8 +16,6 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     var selectedMoviesArray : [Movie] = []
     var numberSelected = 0
     let movieClient = MovieClient()
-    var user1IsSelecting: Bool?
-    var user2IsSelecting: Bool?
     
     // MARK: Outlets
     @IBOutlet weak var numberSelectedLabel: UILabel!
@@ -82,12 +80,14 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 let homeViewController = self.navigationController?.viewControllers[0] as! HomeViewController
                 
-                if self.user1IsSelecting == true {
+                let userDefaults = UserDefaults.standard
+                
+                if userDefaults.bool(forKey: "user1IsSelecting") == true {
                     homeViewController.user1HasSelected = true
                     homeViewController.user1Selections.append(contentsOf: selectedMoviesArray)
                 }
                 
-                if user2IsSelecting == true {
+                if userDefaults.bool(forKey: "user2IsSelecting") == true {
                     homeViewController.user2HasSelected = true
                     homeViewController.user2Selections.append(contentsOf: selectedMoviesArray)
                 }

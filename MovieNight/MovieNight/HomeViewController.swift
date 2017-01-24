@@ -18,10 +18,9 @@ class HomeViewController: UIViewController {
     // MARK: Variables
     var user1Selections: [Movie] = []
     var user2Selections: [Movie] = []
-    var user1IsSelecting: Bool = false
-    var user2IsSelecting: Bool = false
     var user1HasSelected: Bool = false
     var user2HasSelected: Bool = false
+    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +31,14 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.user1IsSelecting = false
-        self.user2IsSelecting = false
+        userDefaults.set(false, forKey: "user1IsSelecting")
+        userDefaults.set(false, forKey: "user2IsSelecting")
+        
+        if user1HasSelected == true && user2HasSelected == true {
+            print(user1Selections)
+            print(user2Selections)
+        }
+        
         updateButtonImages()
     }
 
@@ -54,21 +59,23 @@ class HomeViewController: UIViewController {
             
         } else {
            
-            genresListViewController.user1isSelecting = true
+            userDefaults.set(true, forKey: "user1IsSelecting")
             self.navigationController?.pushViewController(genresListViewController, animated: true)
         }
         
     }
     
     @IBAction func user2ButtonPressed(sender: UIButton) {
-         let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
+        
+        let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
         if user2HasSelected == true {
             
             presentAlertWithOptions(for: 2)
             
         } else {
-            genresListViewController.user2isSelecting = true
+            
+            userDefaults.set(true, forKey: "user2IsSelecting")
             self.navigationController?.pushViewController(genresListViewController, animated: true)
         }
     }
@@ -98,13 +105,13 @@ class HomeViewController: UIViewController {
                 self.user1HasSelected = false
                 self.user1Selections = []
                 self.updateButtonImages()
-                genresListViewController.user1isSelecting = true
+                self.userDefaults.set(true, forKey: "user1IsSelecting")
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             } else if userNumber == 2 {
                 self.user2HasSelected = false
                 self.user2Selections = []
                 self.updateButtonImages()
-                genresListViewController.user2isSelecting = true
+                self.userDefaults.set(true, forKey: "user2IsSelecting")
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             }
             
