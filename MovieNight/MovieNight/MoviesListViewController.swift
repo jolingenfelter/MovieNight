@@ -24,19 +24,49 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchMovies()
-        
-
+        navBarSetup()
+    
         //TableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsMultipleSelection = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchMovies()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
 
+    }
+    
+    // MARK: Navbar Setup
+    
+    func navBarSetup() {
+        self.navigationItem.title = "Select Movies"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        doneButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        let backButton = UIBarButtonItem(title: "< Genres", style: .plain, target: self, action: #selector(backPressed))
+        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = backButton
+        
+    }
+    
+    func donePressed() {
+        if let navController = self.navigationController {
+            navController.popToRootViewController(animated: true)
+        }
+    }
+    
+    func backPressed() {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
     }
     
     // MARK: MovieClient
