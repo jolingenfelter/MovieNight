@@ -85,6 +85,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="user1Button" destination="Tgx-tN-Ldo" id="l2z-j8-8nY"/>
+                        <outlet property="user2Button" destination="MmQ-4r-sTY" id="D09-KI-fYV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,7 +97,7 @@
         <!--Genres List View Controller-->
         <scene sceneID="XRp-Ok-Ofc">
             <objects>
-                <viewController id="fot-Rm-ItU" customClass="GenresListViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GenresListViewController" id="fot-Rm-ItU" customClass="GenresListViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xmG-Zo-7vG"/>
                         <viewControllerLayoutGuide type="bottom" id="h9I-KD-38q"/>
