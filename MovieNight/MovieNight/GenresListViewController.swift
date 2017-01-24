@@ -15,6 +15,8 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     var genresArray: [Genre]?
     var selectedGenresArray: [Genre] = []
     var numberSelected = 0
+    var user1isSelecting: Bool?
+    var user2isSelecting: Bool?
     
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -53,6 +55,7 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
+
     }
     
     func nextPressed() {
@@ -62,6 +65,15 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         if numberSelected != 5 {
             displayAlert(with: "Whoops!", and: "You must choose 5 genres!")
         } else {
+            
+            if self.user1isSelecting == true {
+                moviesListViewController.user1IsSelecting = true
+            }
+            
+            if user2isSelecting == true {
+                moviesListViewController.user2IsSelecting = true
+            }
+            
             self.navigationController?.pushViewController(moviesListViewController, animated: true)
         }
     }

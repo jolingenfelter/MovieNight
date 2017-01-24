@@ -16,6 +16,8 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     var selectedMoviesArray : [Movie] = []
     var numberSelected = 0
     let movieClient = MovieClient()
+    var user1IsSelecting: Bool?
+    var user2IsSelecting: Bool?
     
     // MARK: Outlets
     @IBOutlet weak var numberSelectedLabel: UILabel!
@@ -28,10 +30,11 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         numberSelectedLabel.text = "\(numberSelected)/5 selected"
     
-        //TableView
+        // TableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsMultipleSelection = true
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +81,15 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
             } else {
                 let homeViewController = self.navigationController?.viewControllers[0] as! HomeViewController
                 homeViewController.selectedMovies.append(contentsOf: selectedMoviesArray)
+                
+                if self.user1IsSelecting == true {
+                    homeViewController.user1HasSelected = true
+                }
+                
+                if user2IsSelecting == true {
+                    homeViewController.user2HasSelected = true
+                }
+                
                 navController.popToRootViewController(animated: true)
             }
         }

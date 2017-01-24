@@ -88,6 +88,7 @@
                     <connections>
                         <outlet property="user1Button" destination="Tgx-tN-Ldo" id="l2z-j8-8nY"/>
                         <outlet property="user2Button" destination="MmQ-4r-sTY" id="D09-KI-fYV"/>
+                        <outlet property="viewResultsButton" destination="2X4-hV-m5r" id="ZbS-e5-gqS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
