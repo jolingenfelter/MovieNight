@@ -80,14 +80,15 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
                 
             } else {
                 let homeViewController = self.navigationController?.viewControllers[0] as! HomeViewController
-                homeViewController.selectedMovies.append(contentsOf: selectedMoviesArray)
                 
                 if self.user1IsSelecting == true {
                     homeViewController.user1HasSelected = true
+                    homeViewController.user1Selections.append(contentsOf: selectedMoviesArray)
                 }
                 
                 if user2IsSelecting == true {
                     homeViewController.user2HasSelected = true
+                    homeViewController.user2Selections.append(contentsOf: selectedMoviesArray)
                 }
                 
                 navController.popToRootViewController(animated: true)

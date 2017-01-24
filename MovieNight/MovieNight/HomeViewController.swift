@@ -16,7 +16,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var viewResultsButton: UIButton!
     
     // MARK: Variables
-    var selectedMovies: [Movie] = []
+    var user1Selections: [Movie] = []
+    var user2Selections: [Movie] = []
     var user1IsSelecting: Bool = false
     var user2IsSelecting: Bool = false
     var user1HasSelected: Bool = false
@@ -34,8 +35,13 @@ class HomeViewController: UIViewController {
         self.user1IsSelecting = false
         self.user2IsSelecting = false
         
-        print("user1: \(user1HasSelected)")
-        print("user2: \(user2HasSelected)")
+        for movie in user1Selections {
+            print(movie.title)
+        }
+        
+        for movie in user2Selections {
+            print(movie.title)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,9 +94,13 @@ class HomeViewController: UIViewController {
         let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
             
             if userNumber == 1 {
+                self.user1HasSelected = false
+                self.user1Selections = []
                 genresListViewController.user1isSelecting = true
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             } else if userNumber == 2 {
+                self.user2HasSelected = false
+                self.user2Selections = []
                 genresListViewController.user2isSelecting = true
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             }
