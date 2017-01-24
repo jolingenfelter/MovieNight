@@ -76,12 +76,18 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
             return
         }
         
+        var unsortedMoviesArray: [Movie] = []
+        
         for genre in genresArray {
             movieClient.fetchMoviesWithGenre(withQuery: genre.id, completion: { (result) in
                 switch result {
                 case .success(let movies):
                     
-                    self.moviesArray.append(contentsOf: movies)
+                    unsortedMoviesArray.append(contentsOf: movies)
+                    let dedupedArray = unsortedMoviesArray.uniqueElements
+                    let sortedArray = dedupedArray.sorted { $0.title! < $1.title! }
+                    self.moviesArray = sortedArray
+                    
                     self.tableView.reloadData()
                 
                 case .failure(let error): print(error)

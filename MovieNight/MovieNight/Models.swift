@@ -24,12 +24,15 @@ extension Genre: jsonDecodable {
 
 // MARK: Movies
 
-struct Movie {
+struct Movie: Hashable {
     let title: String?
     let releaseDate: String?
     let overview: String?
     let genre: Genre?
     let id: Int?
+    var hashValue: Int {
+        return self.id!
+    }
 }
 
 extension Movie: jsonDecodable {
