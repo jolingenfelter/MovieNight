@@ -9,6 +9,12 @@
 import UIKit
 
 class MoviesListViewController: UIViewController {
+    
+    // MARK: Variables
+    var genresArray: [Genre]?
+    var moviesArray: [Movie]?
+    let selectedMoviesArray : [Movie] = []
+    var numberSelected = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -44,8 +44,13 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func nextPressed() {
-        if let navigationController = self.navigationController {
-            navigationController.popViewController(animated: true)
+        let moviesListViewController = storyboard?.instantiateViewController(withIdentifier: "MoviesListViewController") as! MoviesListViewController
+        moviesListViewController.genresArray = selectedGenresArray
+        
+        if numberSelected != 5 {
+            displayAlert(with: "Whoops!", and: "You must choose 5 genres!")
+        } else {
+            self.navigationController?.pushViewController(moviesListViewController, animated: true)
         }
     }
 
@@ -137,7 +142,5 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         numberSelected -= 1
         numberSelectedLabel.text = "\(numberSelected)/5 selected"
     }
-    
-    
     
 }
