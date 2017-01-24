@@ -13,7 +13,7 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: Variables
     let movieClient = MovieClient()
     var genresArray: [Genre]?
-    var selectedGenresArray: [Genre]?
+    var selectedGenresArray: [Genre] = []
     var numberSelected = 0
     
     // MARK: Outlets
@@ -103,15 +103,41 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if numberSelected >= 5 {
+            
             tableView.deselectRow(at: indexPath, animated: true)
+            
         } else {
+            
+            guard let genresArray = genresArray else {
+                return
+            }
+            
+            let genre = genresArray[indexPath.row]
+            selectedGenresArray.append(genre)
+            print(selectedGenresArray)
             numberSelected += 1
+            numberSelectedLabel.text = "\(numberSelected)/5 selected"
+            
         }
         
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+       
+        guard let genresArray = genresArray else {
+            return
+        }
+        
+        let genre = genresArray[indexPath.row]
+        if let genreToDeselectIndex = selectedGenresArray.index(where: {$0.name == genre.name}) {
+            selectedGenresArray.remove(at: genreToDeselectIndex)
+        }
+        
         numberSelected -= 1
+        numberSelectedLabel.text = "\(numberSelected)/5 selected"
+        print(selectedGenresArray)
     }
+    
+    
     
 }
