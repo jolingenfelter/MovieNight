@@ -34,13 +34,21 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: NavigationBar
     
     func navBarSetup() {
-        self.navigationItem.hidesBackButton = true
         self.navigationItem.title = "Select Genres"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPressed))
         nextButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
         self.navigationItem.rightBarButtonItem = nextButton
-        
+        let backButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backPressed))
+        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func backPressed() {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
     }
     
     func nextPressed() {

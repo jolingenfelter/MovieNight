@@ -54,7 +54,6 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = backButton
-        
     }
     
     func donePressed() {
