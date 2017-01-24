@@ -20,16 +20,6 @@ extension UIViewController {
     }
 }
 
-struct Sections {
-    var title: String
-    var items: [Movie]
-    
-    init(title: String, items: [Movie]) {
-        self.title = title
-        self.items = items
-    }
-}
-
 func == (lhs: Movie, rhs: Movie) -> Bool {
     return lhs.id == rhs.id
 }

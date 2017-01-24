@@ -12,8 +12,8 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: Variables
     var genresArray: [Genre]?
-    var moviesArray: [Movie] = []
-    let selectedMoviesArray : [Movie] = []
+    var moviesArray: [Movie]?
+    var selectedMoviesArray : [Movie] = []
     var numberSelected = 0
     let movieClient = MovieClient()
     
@@ -105,23 +105,63 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        guard let moviesArray = moviesArray else {
+            return 0
+        }
+        
         return moviesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieTableViewCell
         
-        let movie = moviesArray[indexPath.row]
-        cell.movieLabel.text = movie.title
+        if let moviesArray = moviesArray {
+            let movie = moviesArray[indexPath.row]
+            cell.movieLabel.text = movie.title
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if numberSelected >= 5 {
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            displayAlert(with: "Whoopsie!", and: "You have already selected 5 movies!")
+            
+        } else {
+            
+            guard let moviesArray = moviesArray else {
+                return
+            }
+            
+            let movie = moviesArray[indexPath.row]
+            selectedMoviesArray.append(movie)
+            numberSelected += 1
+            numberSelectedLabel.text = "\(numberSelected)/5 selected"
+            
+        }
+
+        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        guard let moviesArray = moviesArray else {
+            return
+        }
+        
+        let movie = moviesArray[indexPath.row]
+        
+        if let movieIndex = selectedMoviesArray.index(where: {$0.title == movie.title}) {
+            selectedMoviesArray.remove(at: movieIndex)
+        }
+        
+        numberSelected -= 1
+        numberSelectedLabel.text = "\(numberSelected)/5 selected"
         
     }
 
