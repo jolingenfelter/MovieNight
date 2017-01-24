@@ -34,6 +34,22 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.user1IsSelecting = false
         self.user2IsSelecting = false
+        updateButtonImages()
+    }
+    
+     func updateButtonImages() {
+        
+        if user1HasSelected == true{
+            user1Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
+        } else {
+            user1Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
+        }
+        
+        if user2HasSelected == true {
+            user2Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
+        } else {
+            user2Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,7 +87,11 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func resetSelections(sender: UIBarButtonItem) {
-        
+        user1HasSelected = false
+        user2HasSelected = false
+        updateButtonImages()
+        user1Selections = []
+        user2Selections = []
     }
     
     @IBAction func viewResults(sender: UIButton) {
@@ -88,11 +108,13 @@ class HomeViewController: UIViewController {
             if userNumber == 1 {
                 self.user1HasSelected = false
                 self.user1Selections = []
+                self.updateButtonImages()
                 genresListViewController.user1isSelecting = true
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             } else if userNumber == 2 {
                 self.user2HasSelected = false
                 self.user2Selections = []
+                self.updateButtonImages()
                 genresListViewController.user2isSelecting = true
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             }
