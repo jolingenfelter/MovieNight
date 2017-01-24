@@ -106,6 +106,8 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
             
             tableView.deselectRow(at: indexPath, animated: true)
             
+            displayAlert(with: "Whoopsie!", and: "You have already selected 5 genres!")
+            
         } else {
             
             guard let genresArray = genresArray else {
@@ -114,7 +116,6 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
             
             let genre = genresArray[indexPath.row]
             selectedGenresArray.append(genre)
-            print(selectedGenresArray)
             numberSelected += 1
             numberSelectedLabel.text = "\(numberSelected)/5 selected"
             
@@ -135,7 +136,6 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         numberSelected -= 1
         numberSelectedLabel.text = "\(numberSelected)/5 selected"
-        print(selectedGenresArray)
     }
     
     
