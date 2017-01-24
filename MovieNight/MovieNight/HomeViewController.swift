@@ -34,11 +34,6 @@ class HomeViewController: UIViewController {
         userDefaults.set(false, forKey: "user1IsSelecting")
         userDefaults.set(false, forKey: "user2IsSelecting")
         
-        if user1HasSelected == true && user2HasSelected == true {
-            print(user1Selections)
-            print(user2Selections)
-        }
-        
         updateButtonImages()
     }
 
@@ -90,9 +85,24 @@ class HomeViewController: UIViewController {
     
     @IBAction func viewResults(sender: UIButton) {
         
+        if user1HasSelected == true && user2HasSelected == true {
+            
+            let resultsListViewController = storyboard?.instantiateViewController(withIdentifier: "MovieResultsListViewController") as! MovieResultsListViewController
+            
+            resultsListViewController.resultsList.append(contentsOf: user1Selections)
+            resultsListViewController.resultsList.append(contentsOf: user2Selections)
+            
+            self.navigationController?.pushViewController(resultsListViewController, animated: true)
+            
+        } else {
+            
+            displayAlert(with: "Whoopsi!", and: "Both users must make selections before you can view the results.")
+            
+        }
+        
     }
     
-    // MARK: Update Selections
+    // MARK: Alert for reselecting
     
     func presentAlertWithOptions(for userNumber: Int) {
         
@@ -124,6 +134,8 @@ class HomeViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
+    
+    // MARK: Update Buttons
     
     func updateButtonImages() {
         

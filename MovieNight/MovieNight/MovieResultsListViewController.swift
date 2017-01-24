@@ -9,11 +9,23 @@
 import UIKit
 
 class MovieResultsListViewController: UIViewController {
+    
+    // MARK: Variables
+    var resultsList: [Movie] = []
+    
+    //MARK: Outlets
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sortThroughResults()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func sortThroughResults() {
+        let deDupedArray = resultsList.uniqueElements
+        let sortedArray = deDupedArray.sorted { $0.title! < $1.title! }
+        resultsList = sortedArray
     }
 
     override func didReceiveMemoryWarning() {
