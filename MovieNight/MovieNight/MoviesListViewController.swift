@@ -12,9 +12,10 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: Variables
     var genresArray: [Genre]?
-    var moviesArray: [Movie]?
+    var moviesArray: [Movie] = []
     let selectedMoviesArray : [Movie] = []
     var numberSelected = 0
+    let movieClient = MovieClient()
     
     // MARK: Outlets
     @IBOutlet weak var numberSelectedLabel: UILabel!
@@ -23,6 +24,8 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchMovies()
+        
 
         //TableView
         self.tableView.delegate = self
@@ -36,6 +39,30 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     }
     
+    // MARK: MovieClient
+    
+    func fetchMovies() {
+        
+        guard let genresArray = genresArray else {
+            return
+        }
+        
+        for genre in genresArray {
+            movieClient.fetchMoviesWithGenre(withQuery: genre.id, completion: { (result) in
+                switch result {
+                case .success(let movies):
+                    
+                    self.moviesArray.append(contentsOf: movies)
+                    self.tableView.reloadData()
+                
+                case .failure(let error): print(error)
+                    
+                }
+            })
+        }
+        
+    }
+    
     // MARK: TableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,19 +70,14 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let moviesArray = moviesArray else {
-            return 0
-        }
         return moviesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieTableViewCell
         
-        if let moviesArray = moviesArray {
-            let movie = moviesArray[indexPath.row]
-            cell.movieLabel.text = movie.title
-        }
+        let movie = moviesArray[indexPath.row]
+        cell.movieLabel.text = movie.title
         
         return cell
     }
