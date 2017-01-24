@@ -36,26 +36,13 @@ class HomeViewController: UIViewController {
         self.user2IsSelecting = false
         updateButtonImages()
     }
-    
-     func updateButtonImages() {
-        
-        if user1HasSelected == true{
-            user1Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
-        } else {
-            user1Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
-        }
-        
-        if user2HasSelected == true {
-            user2Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
-        } else {
-            user2Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
-        }
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: IBActions
     
     @IBAction func user1ButtonPressed(sender: UIButton) {
         
@@ -98,6 +85,8 @@ class HomeViewController: UIViewController {
         
     }
     
+    // MARK: Update Selections
+    
     func presentAlertWithOptions(for userNumber: Int) {
         
         let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
@@ -127,6 +116,21 @@ class HomeViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    func updateButtonImages() {
+        
+        if user1HasSelected == true{
+            user1Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
+        } else {
+            user1Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
+        }
+        
+        if user2HasSelected == true {
+            user2Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
+        } else {
+            user2Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
+        }
     }
 
 }
