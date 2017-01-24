@@ -34,14 +34,6 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.user1IsSelecting = false
         self.user2IsSelecting = false
-        
-        for movie in user1Selections {
-            print(movie.title)
-        }
-        
-        for movie in user2Selections {
-            print(movie.title)
-        }
     }
 
     override func didReceiveMemoryWarning() {

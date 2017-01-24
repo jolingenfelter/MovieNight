@@ -79,6 +79,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.present(alert, animated: true, completion: nil)
                 
             } else {
+                
                 let homeViewController = self.navigationController?.viewControllers[0] as! HomeViewController
                 
                 if self.user1IsSelecting == true {
