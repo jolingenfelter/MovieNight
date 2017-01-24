@@ -31,6 +31,10 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.allowsMultipleSelection = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        numberSelectedLabel.text = "\(numberSelected)/5 selected"
+    }
+    
     // MARK: NavigationBar
     
     func navBarSetup() {

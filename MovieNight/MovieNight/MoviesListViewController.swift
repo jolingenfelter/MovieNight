@@ -25,6 +25,8 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         navBarSetup()
+        
+        numberSelectedLabel.text = "\(numberSelected)/5 selected"
     
         //TableView
         self.tableView.delegate = self
@@ -50,6 +52,7 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         doneButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        self.navigationItem.rightBarButtonItem = doneButton
         let backButton = UIBarButtonItem(title: "< Genres", style: .plain, target: self, action: #selector(backPressed))
         backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
         self.navigationItem.hidesBackButton = true
