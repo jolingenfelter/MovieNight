@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesListViewController: UIViewController {
+class MoviesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: Variables
     var genresArray: [Genre]?
@@ -24,7 +24,10 @@ class MoviesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //TableView
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.allowsMultipleSelection = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,15 +36,36 @@ class MoviesListViewController: UIViewController {
 
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: TableView
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    */
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let moviesArray = moviesArray else {
+            return 0
+        }
+        return moviesArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieTableViewCell
+        
+        if let moviesArray = moviesArray {
+            let movie = moviesArray[indexPath.row]
+            cell.movieLabel.text = movie.title
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+    }
 
 }
