@@ -60,8 +60,24 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func donePressed() {
+        
         if let navController = self.navigationController {
-            navController.popToRootViewController(animated: true)
+            
+            if selectedMoviesArray.count != 5 {
+                
+                let alert = UIAlertController(title: "Oopsi!", message: "You have not selected 5 movies.  If you proceed all selections will be lost.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .destructive, handler: { (action) in
+                    navController.popToRootViewController(animated: true)
+                })
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                
+                self.present(alert, animated: true, completion: nil)
+                
+            } else {
+                navController.popToRootViewController(animated: true)
+            }
         }
     }
     

@@ -9,6 +9,12 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    // MARK: Outlets
+    @IBOutlet weak var user1Button: UIButton!
+    @IBOutlet weak var user2Button: UIButton!
+    @IBOutlet weak var resetButton: UIBarButtonItem!
+    @IBOutlet weak var viewResultsButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
