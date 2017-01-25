@@ -32,12 +32,19 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsMultipleSelection = true
+        
+        // Observers
+        NotificationCenter.default.addObserver(self, selector: #selector(connectionErrorAlert), name: NSNotification.Name(rawValue: "ConnectionError"), object: nil)
     
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchMovies()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ConnectionError"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -207,6 +214,20 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         numberSelected -= 1
         numberSelectedLabel.text = "\(numberSelected)/5 selected"
         
+    }
+    
+    // MARK: Connection Loss
+    
+    func connectionErrorAlert() {
+        let alert = UIAlertController(title: "No Connection", message: "Movie Night requires a network connection", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            if let navController = self.navigationController {
+                navController.popToRootViewController(animated: true)
+            }
+        }
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

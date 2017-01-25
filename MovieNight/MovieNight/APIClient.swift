@@ -41,7 +41,11 @@ extension APIClient {
     func jsonTaskWithRequest(_ request: URLRequest, completion: @escaping jsonTaskCompletion) -> jsonTask {
         let task = session.dataTask(with: request, completionHandler: { data, response, error in
             guard let HTTPURLResponse = response as? HTTPURLResponse else {
+                
                 let userInfo = [NSLocalizedDescriptionKey: NSLocalizedString("MissingHTTPResonse", comment: "")]
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ConnectionError"), object: nil)
+                
                 let error = NSError(domain: TRENetworkingDomainError, code: MissingHTTPResonse, userInfo: userInfo)
                 completion(nil, nil, error)
                 return
