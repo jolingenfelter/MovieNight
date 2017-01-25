@@ -23,6 +23,7 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navBarSetup()
 
         // TableView
         self.tableView.delegate = self
@@ -33,6 +34,23 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
         let deDupedArray = resultsList.uniqueElements
         let sortedArray = deDupedArray.sorted { $0.title! < $1.title! }
         resultsList = sortedArray
+    }
+    
+    // MARK: NavBar
+    
+    func navBarSetup() {
+        self.navigationItem.title = "Results"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        let backButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backPressed))
+        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func backPressed() {
+        if let navController = navigationController {
+            navController.popViewController(animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
