@@ -114,7 +114,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3LA-l5-FVD" id="QXQ-hG-lOh">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MAD-0F-Z3N">
@@ -190,7 +190,7 @@
         <!--Movie Results Detail View Controller-->
         <scene sceneID="RlN-7E-NoB">
             <objects>
-                <viewController id="sdr-fn-lOW" customClass="MovieResultsDetailViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailsViewController" id="sdr-fn-lOW" customClass="MovieResultsDetailViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tLl-Pe-UpH"/>
                         <viewControllerLayoutGuide type="bottom" id="Wvv-rw-Ycj"/>
@@ -199,7 +199,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ngf-jd-eWR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ngf-jd-eWR">
                                 <rect key="frame" x="62" y="80" width="250" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="AAT-TB-iaC"/>
@@ -215,17 +215,49 @@
                                 <state key="normal" title="Finish">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="finshPressedWithSender:" destination="sdr-fn-lOW" eventType="touchUpInside" id="gAo-SC-dIu"/>
+                                </connections>
                             </button>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8UV-Gk-fD0">
+                                <rect key="frame" x="46" y="360" width="283" height="180"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="ePe-PO-UJo"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="releaseDateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWx-Ca-pZc">
+                                <rect key="frame" x="62" y="340" width="100" height="14.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="z93-EG-IBv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Wvv-rw-Ycj" firstAttribute="top" secondItem="B2u-E3-Xmp" secondAttribute="bottom" id="1sJ-BW-aCd"/>
+                            <constraint firstItem="8UV-Gk-fD0" firstAttribute="top" secondItem="ngf-jd-eWR" secondAttribute="bottom" constant="30" id="5Ox-dI-mSn"/>
+                            <constraint firstItem="pWx-Ca-pZc" firstAttribute="top" secondItem="ngf-jd-eWR" secondAttribute="bottom" constant="10" id="DgZ-YV-2ib"/>
                             <constraint firstItem="B2u-E3-Xmp" firstAttribute="leading" secondItem="NCd-J7-se7" secondAttribute="leadingMargin" constant="-20" id="Fla-8j-C7Y"/>
                             <constraint firstItem="ngf-jd-eWR" firstAttribute="top" secondItem="tLl-Pe-UpH" secondAttribute="bottom" constant="60" id="JUw-BX-gCm"/>
+                            <constraint firstItem="pWx-Ca-pZc" firstAttribute="leading" secondItem="ngf-jd-eWR" secondAttribute="leading" id="cdE-kx-0jY"/>
                             <constraint firstItem="ngf-jd-eWR" firstAttribute="centerX" secondItem="NCd-J7-se7" secondAttribute="centerX" id="ftt-M7-ThD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8UV-Gk-fD0" secondAttribute="trailing" constant="30" id="kAg-g8-Iin"/>
+                            <constraint firstItem="8UV-Gk-fD0" firstAttribute="leading" secondItem="NCd-J7-se7" secondAttribute="leadingMargin" constant="30" id="kmt-Uz-9Er"/>
                             <constraint firstAttribute="trailingMargin" secondItem="B2u-E3-Xmp" secondAttribute="trailing" constant="-20" id="xBR-EN-sdY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="movieDescriptionTextField" destination="8UV-Gk-fD0" id="cei-oH-hrg"/>
+                        <outlet property="moviePosterImageView" destination="ngf-jd-eWR" id="8MY-l2-tLf"/>
+                        <outlet property="releaseDateLabel" destination="pWx-Ca-pZc" id="ePa-cN-mDI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhr-cs-vkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -371,7 +403,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IJe-oF-G4z" id="ciC-1q-5Dc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvV-2T-6WM">
