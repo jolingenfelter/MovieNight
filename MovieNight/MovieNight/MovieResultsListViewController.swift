@@ -27,10 +27,6 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
         // TableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        for movie in resultsList {
-            print(movie.moviePosterURL)
-        }
     }
     
     func organizeResultsList() {
@@ -62,6 +58,14 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
         
         cell.movieLabel.text = movie.title
         cell.releaseDateLabel.text = movie.releaseDate
+        
+        // Get MoviePoster
+        if let moviePosterURL = movie.moviePosterURL {
+            let imageGetter = ImageGetter(urlString: moviePosterURL)
+            imageGetter.getImage(completion: { (image) in
+                cell.movieImage.image = image
+            })
+        }
         
         return cell
     }

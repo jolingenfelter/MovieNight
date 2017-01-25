@@ -30,7 +30,7 @@ public extension Sequence where Iterator.Element: Hashable {
     }
 }
 
-class imageGetter {
+class ImageGetter {
     
     let urlString: String
     let url: URL?
