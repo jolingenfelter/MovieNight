@@ -22,6 +22,7 @@
 		9EA8C19B1E37AC2D00E6D231 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA8C19A1E37AC2D00E6D231 /* MovieTableViewCell.swift */; };
 		9EB8F0191E36C3DB00178420 /* GenreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8F0181E36C3DB00178420 /* GenreTableViewCell.swift */; };
 		9EB8F01B1E36D4D700178420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8F01A1E36D4D700178420 /* Assets.xcassets */; };
+		9ED5CE3F1E38DF470083E5EE /* MovieResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5CE3E1E38DF470083E5EE /* MovieResultsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		9EA8C19A1E37AC2D00E6D231 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		9EB8F0181E36C3DB00178420 /* GenreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreTableViewCell.swift; sourceTree = "<group>"; };
 		9EB8F01A1E36D4D700178420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9ED5CE3E1E38DF470083E5EE /* MovieResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResultsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				9E391BE71E369D4B00D8EEB0 /* MoviesListViewController.swift */,
 				9EA8C19A1E37AC2D00E6D231 /* MovieTableViewCell.swift */,
 				9E391BE91E369D7200D8EEB0 /* MovieResultsListViewController.swift */,
+				9ED5CE3E1E38DF470083E5EE /* MovieResultsTableViewCell.swift */,
 				9E391BEB1E369DA500D8EEB0 /* MovieResultsDetailViewController.swift */,
 				9EA8C1981E37A55300E6D231 /* Helpers.swift */,
 				9EB8F0171E36C1D500178420 /* API Client */,
@@ -184,6 +187,7 @@
 				9E391BEC1E369DA500D8EEB0 /* MovieResultsDetailViewController.swift in Sources */,
 				9E391BEA1E369D7200D8EEB0 /* MovieResultsListViewController.swift in Sources */,
 				9E1151EC1E36579F0018BA68 /* MovieClient.swift in Sources */,
+				9ED5CE3F1E38DF470083E5EE /* MovieResultsTableViewCell.swift in Sources */,
 				9EB8F0191E36C3DB00178420 /* GenreTableViewCell.swift in Sources */,
 				9E1151E81E3643C90018BA68 /* APIClient.swift in Sources */,
 				9E1151EA1E36528E0018BA68 /* Models.swift in Sources */,
