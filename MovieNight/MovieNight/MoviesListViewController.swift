@@ -154,6 +154,15 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
         if let moviesArray = moviesArray {
             let movie = moviesArray[indexPath.row]
             cell.movieLabel.text = movie.title
+            
+            // Get MoviePoster
+            if let moviePosterURL = movie.moviePosterURL {
+                let imageGetter = ImageGetter(urlString: moviePosterURL)
+                imageGetter.getImage(completion: { (image) in
+                    cell.movieImage.image = image
+                })
+            }
+            
         }
         
         return cell
