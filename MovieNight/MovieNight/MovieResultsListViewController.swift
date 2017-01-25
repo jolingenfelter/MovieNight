@@ -18,7 +18,7 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        sortThroughResults()
+        organizeResultsList()
     }
 
     override func viewDidLoad() {
@@ -27,9 +27,13 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
         // TableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        for movie in resultsList {
+            print(movie.moviePosterURL)
+        }
     }
     
-    func sortThroughResults() {
+    func organizeResultsList() {
         let deDupedArray = resultsList.uniqueElements
         let sortedArray = deDupedArray.sorted { $0.title! < $1.title! }
         resultsList = sortedArray

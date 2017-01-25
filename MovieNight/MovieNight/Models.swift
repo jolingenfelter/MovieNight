@@ -33,6 +33,8 @@ struct Movie: Hashable {
     var hashValue: Int {
         return self.id!
     }
+    let moviePosterPath: String?
+    let moviePosterURL: String?
 }
 
 extension Movie: jsonDecodable {
@@ -42,5 +44,13 @@ extension Movie: jsonDecodable {
         overview = json["overview"] as? String
         genre = json["genre"] as? Genre
         id = json["id"] as? Int
+        moviePosterPath = json["poster_path"] as? String
+        
+        if let moviePosterPath = moviePosterPath {
+            moviePosterURL = "https://image.tmdb.org/t/p/w500\(moviePosterPath)"
+        } else {
+            moviePosterURL = ""
+        }
+        
     }
 }
