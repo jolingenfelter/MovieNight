@@ -64,13 +64,13 @@ class ImageGetter {
                 return
             }
             
-            DispatchQueue.main.async {
-                if let image = UIImage(data: data) {
-                    completion(image)
-                } else {
-                    completion(nil)
-                }
+           
+            if let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                completion(nil)
             }
+            
             
         }
         
