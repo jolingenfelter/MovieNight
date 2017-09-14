@@ -1,5 +1,5 @@
 //
-//  Models.swift
+//  Movie.swift
 //  MovieNight
 //
 //  Created by Joanna Lingenfelter on 1/23/17.
@@ -8,21 +8,6 @@
 
 import Foundation
 
-// MARK: Genres
-
-struct Genre {
-    let id: Int?
-    let name: String?
-}
-
-extension Genre: jsonDecodable {
-    init?(json: [String : AnyObject]) {
-        id = json["id"] as? Int
-        name = json["name"] as? String
-    }
-}
-
-// MARK: Movies
 
 struct Movie: Hashable {
     let title: String?
