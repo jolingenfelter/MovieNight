@@ -22,8 +22,12 @@ class HomeViewController: UIViewController {
     var user2HasSelected: Bool = false
     let userDefaults = UserDefaults.standard
     
+    let movieChoice = MovieChoice()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        movieChoice.delegate = self
         
         viewResultsButton.layer.masksToBounds = true
         viewResultsButton.layer.cornerRadius = 5
@@ -153,4 +157,35 @@ class HomeViewController: UIViewController {
     }
 
 }
+
+extension HomeViewController: MovieChoiceDelegate {
+    
+    func isChoosing(user: User) {
+        
+    }
+    
+    func didChoose(user: User) {
+        
+    }
+    
+    func didCancelChoice(user: User) {
+        
+    }
+    
+    func choosingIsComplete() {
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
