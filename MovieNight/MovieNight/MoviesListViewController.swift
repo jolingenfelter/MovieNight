@@ -85,18 +85,21 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
                 
             } else {
                 
-                let homeViewController = self.navigationController?.viewControllers[0] as! HomeViewController
+                let homeVC = self.navigationController?.viewControllers[0] as! HomeViewController
+                let movieChoice = homeVC.movieChoice
                 
-                let userDefaults = UserDefaults.standard
-                
-                if userDefaults.bool(forKey: "user1IsSelecting") == true {
-                    homeViewController.user1HasSelected = true
-                    homeViewController.user1Selections.append(contentsOf: selectedMoviesArray)
+                if  movieChoice.user1.isChoosing {
+                    movieChoice.user1DidChoose()
+                    homeVC.user1Selections.append(contentsOf: selectedMoviesArray)
                 }
                 
-                if userDefaults.bool(forKey: "user2IsSelecting") == true {
-                    homeViewController.user2HasSelected = true
-                    homeViewController.user2Selections.append(contentsOf: selectedMoviesArray)
+                if movieChoice.user2.isChoosing {
+                    movieChoice.user2DidChoose()
+                    homeVC.user2Selections.append(contentsOf: selectedMoviesArray)
+                }
+                
+                if movieChoice.choicesComplete {
+                    movieChoice.choosingIsComplete()
                 }
                 
                 navController.popToRootViewController(animated: true)

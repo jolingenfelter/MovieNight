@@ -18,9 +18,6 @@ class HomeViewController: UIViewController {
     // MARK: Variables
     var user1Selections: [Movie] = []
     var user2Selections: [Movie] = []
-    var user1HasSelected: Bool = false
-    var user2HasSelected: Bool = false
-    let userDefaults = UserDefaults.standard
     
     let movieChoice = MovieChoice()
     
@@ -31,14 +28,13 @@ class HomeViewController: UIViewController {
         
         viewResultsButton.layer.masksToBounds = true
         viewResultsButton.layer.cornerRadius = 5
-      
+        viewResultsButton.isEnabled = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        userDefaults.set(false, forKey: "user1IsSelecting")
-        userDefaults.set(false, forKey: "user2IsSelecting")
         
-        updateButtonImages()
+        //updateButtonImages()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,13 +48,13 @@ class HomeViewController: UIViewController {
         
          let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
-        if user1HasSelected == true {
+        if movieChoice.user1.hasChosen == true {
             
            presentAlertWithOptions(for: 1)
             
         } else {
            
-            userDefaults.set(true, forKey: "user1IsSelecting")
+            movieChoice.user1IsChoosing()
             self.navigationController?.pushViewController(genresListViewController, animated: true)
         }
         
@@ -68,28 +64,34 @@ class HomeViewController: UIViewController {
         
         let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
-        if user2HasSelected == true {
+        if movieChoice.user2.hasChosen == true {
             
             presentAlertWithOptions(for: 2)
             
         } else {
             
-            userDefaults.set(true, forKey: "user2IsSelecting")
+            movieChoice.user2IsChoosing()
             self.navigationController?.pushViewController(genresListViewController, animated: true)
         }
     }
     
+    func buttonPressed(forUser: User) {
+    
+        
+    }
+    
     @IBAction func resetSelections(sender: UIBarButtonItem) {
-        user1HasSelected = false
-        user2HasSelected = false
-        updateButtonImages()
+        
+        movieChoice.resetChoices()
+        updateButtonImage(movieChoice.user1)
+        updateButtonImage(movieChoice.user2)
         user1Selections = []
         user2Selections = []
     }
     
     @IBAction func viewResults(sender: UIButton) {
         
-        if user1HasSelected == true && user2HasSelected == true {
+        if movieChoice.choicesComplete == true {
             
             let resultsListViewController = storyboard?.instantiateViewController(withIdentifier: "MovieResultsListViewController") as! MovieResultsListViewController
             
@@ -116,16 +118,10 @@ class HomeViewController: UIViewController {
         let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
             
             if userNumber == 1 {
-                self.user1HasSelected = false
                 self.user1Selections = []
-                self.updateButtonImages()
-                self.userDefaults.set(true, forKey: "user1IsSelecting")
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             } else if userNumber == 2 {
-                self.user2HasSelected = false
                 self.user2Selections = []
-                self.updateButtonImages()
-                self.userDefaults.set(true, forKey: "user2IsSelecting")
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             }
             
@@ -139,20 +135,11 @@ class HomeViewController: UIViewController {
         
     }
     
-    // MARK: Update Buttons
-    
-    func updateButtonImages() {
-        
-        if user1HasSelected == true{
-            user1Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
-        } else {
+    func updateButtonImage(_ user: User) {
+        if !user.hasChosen {
             user1Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
-        }
-        
-        if user2HasSelected == true {
-            user2Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
         } else {
-            user2Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
+            user2Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
         }
     }
 
@@ -160,20 +147,19 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: MovieChoiceDelegate {
     
-    func isChoosing(user: User) {
-        
-    }
-    
     func didChoose(user: User) {
+        
+        updateButtonImage(user)
         
     }
     
     func didCancelChoice(user: User) {
         
+        updateButtonImage(user)
     }
     
     func choosingIsComplete() {
-        
+        viewResultsButton.isEnabled = true
     }
     
 }
