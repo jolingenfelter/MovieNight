@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
         
          let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
-        if movieChoice.user1.hasChosen == true {
+        if movieChoice.user1.hasChosen {
             
            presentAlertWithOptions(forUser: movieChoice.user1)
             
@@ -62,7 +62,7 @@ class HomeViewController: UIViewController {
         
         let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
-        if movieChoice.user2.hasChosen == true {
+        if movieChoice.user2.hasChosen {
             
             presentAlertWithOptions(forUser: movieChoice.user2)
             
@@ -71,11 +71,6 @@ class HomeViewController: UIViewController {
             movieChoice.user2IsChoosing()
             self.navigationController?.pushViewController(genresListViewController, animated: true)
         }
-    }
-    
-    func buttonPressed(forUser: User) {
-    
-        
     }
     
     @IBAction func resetSelections(sender: UIBarButtonItem) {
@@ -169,6 +164,11 @@ extension HomeViewController: MovieChoiceDelegate {
     func choosingIsComplete() {
         viewResultsButton.isEnabled = true
         completedMovieList = movieChoice.completeChoicesList
+    }
+    
+    func resetChoices() {
+        updateButtonImage(movieChoice.user1)
+        updateButtonImage(movieChoice.user2)
     }
     
 }

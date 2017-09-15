@@ -81,7 +81,11 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
         if let moviePosterURL = movie.moviePosterURL {
             let imageGetter = ImageGetter(urlString: moviePosterURL)
             imageGetter.getImage(completion: { (image) in
-                cell.movieImage.image = image
+                
+                DispatchQueue.main.async {
+                   cell.movieImage.image = image 
+                }
+            
             })
         }
         

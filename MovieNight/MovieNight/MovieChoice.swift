@@ -12,6 +12,7 @@ protocol MovieChoiceDelegate {
     
     func didChoose(user: User, movies: [Movie])
     func choosingIsComplete()
+    func resetChoices()
     
 }
 
