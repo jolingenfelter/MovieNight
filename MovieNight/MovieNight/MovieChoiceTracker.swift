@@ -1,5 +1,5 @@
 //
-//  MovieChoice.swift
+//  MovieChoiceTracker.swift
 //  MovieNight
 //
 //  Created by Joanna Lingenfelter on 9/14/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MovieChoiceDelegate {
+protocol MovieChoiceTrackerDelegate {
     
     func didChoose(user: User)
     func choosingIsComplete()
@@ -16,7 +16,7 @@ protocol MovieChoiceDelegate {
     
 }
 
-class MovieChoice {
+class MovieChoiceTracker {
     
     let user1 = User(userNumber: 1)
     let user2 = User(userNumber: 2)
@@ -32,7 +32,7 @@ class MovieChoice {
         return array
     }
     
-    var delegate: MovieChoiceDelegate?
+    var delegate: MovieChoiceTrackerDelegate?
     
     func user1IsChoosing() {
         user1.isChoosing = true

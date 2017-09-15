@@ -223,18 +223,18 @@ extension MoviesListViewController {
             } else {
                 
                 let homeVC = self.navigationController?.viewControllers[0] as! HomeViewController
-                let movieChoice = homeVC.movieChoice
+                let movieChoiceTracker = homeVC.movieChoiceTracker
                 
-                if  movieChoice.user1.isChoosing {
-                    movieChoice.user1DidChoose(movies: selectedMoviesArray)
+                if  movieChoiceTracker.user1.isChoosing {
+                    movieChoiceTracker.user1DidChoose(movies: selectedMoviesArray)
                 }
                 
-                if movieChoice.user2.isChoosing {
-                    movieChoice.user2DidChoose(movies: selectedMoviesArray)
+                if movieChoiceTracker.user2.isChoosing {
+                    movieChoiceTracker.user2DidChoose(movies: selectedMoviesArray)
                 }
                 
-                if movieChoice.choicesComplete {
-                    movieChoice.choosingIsComplete()
+                if movieChoiceTracker.choicesComplete {
+                    movieChoiceTracker.choosingIsComplete()
                 }
                 
                 navController.popToRootViewController(animated: true)

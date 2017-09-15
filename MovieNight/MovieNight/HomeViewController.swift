@@ -15,12 +15,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var user2Button: UIButton!
     @IBOutlet weak var viewResultsButton: UIButton!
     
-    let movieChoice = MovieChoice()
+    let movieChoiceTracker = MovieChoiceTracker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        movieChoice.delegate = self
+        movieChoiceTracker.delegate = self
         
         viewResultsButton.layer.masksToBounds = true
         viewResultsButton.layer.cornerRadius = 5
@@ -45,13 +45,13 @@ class HomeViewController: UIViewController {
         
          let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
-        if movieChoice.user1.hasChosen {
+        if movieChoiceTracker.user1.hasChosen {
             
-           presentAlertWithOptions(forUser: movieChoice.user1)
+           presentAlertWithOptions(forUser: movieChoiceTracker.user1)
             
         } else {
            
-            movieChoice.user1IsChoosing()
+            movieChoiceTracker.user1IsChoosing()
             self.navigationController?.pushViewController(genresListViewController, animated: true)
         }
         
@@ -61,13 +61,13 @@ class HomeViewController: UIViewController {
         
         let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
-        if movieChoice.user2.hasChosen {
+        if movieChoiceTracker.user2.hasChosen {
             
-            presentAlertWithOptions(forUser: movieChoice.user2)
+            presentAlertWithOptions(forUser: movieChoiceTracker.user2)
             
         } else {
             
-            movieChoice.user2IsChoosing()
+            movieChoiceTracker.user2IsChoosing()
             self.navigationController?.pushViewController(genresListViewController, animated: true)
         }
     }
@@ -79,9 +79,9 @@ class HomeViewController: UIViewController {
     }
     
     func resetAll() {
-        movieChoice.resetChoices()
-        updateButtonImage(movieChoice.user1)
-        updateButtonImage(movieChoice.user2)
+        movieChoiceTracker.resetChoices()
+        updateButtonImage(movieChoiceTracker.user1)
+        updateButtonImage(movieChoiceTracker.user2)
         viewResultsButton.isEnabled = false
         viewResultsButton.alpha = 0.75
     }
@@ -90,7 +90,7 @@ class HomeViewController: UIViewController {
         
         let resultsListViewController = storyboard?.instantiateViewController(withIdentifier: "MovieResultsListViewController") as! MovieResultsListViewController
         
-        resultsListViewController.resultsList.append(contentsOf: movieChoice.completeChoicesList)
+        resultsListViewController.resultsList.append(contentsOf: movieChoiceTracker.completeChoicesList)
         
         self.navigationController?.pushViewController(resultsListViewController, animated: true)
         
@@ -106,10 +106,10 @@ class HomeViewController: UIViewController {
         let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
             
             if user.userNumber == 1 {
-                self.movieChoice.user1.choices = []
+                self.movieChoiceTracker.user1.choices = []
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             } else {
-                self.movieChoice.user2.choices = []
+                self.movieChoiceTracker.user2.choices = []
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             }
             
@@ -150,7 +150,7 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: MovieChoiceDelegate {
+extension HomeViewController: MovieChoiceTrackerDelegate {
     
     func didChoose(user: User) {
         updateButtonImage(user)
