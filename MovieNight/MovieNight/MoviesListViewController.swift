@@ -90,12 +90,12 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 if  movieChoice.user1.isChoosing {
                     movieChoice.user1DidChoose()
-                    homeVC.user1Selections.append(contentsOf: selectedMoviesArray)
+                    movieChoice.user1.choices = selectedMoviesArray
                 }
                 
                 if movieChoice.user2.isChoosing {
                     movieChoice.user2DidChoose()
-                    homeVC.user2Selections.append(contentsOf: selectedMoviesArray)
+                    movieChoice.user2.choices = selectedMoviesArray
                 }
                 
                 if movieChoice.choicesComplete {

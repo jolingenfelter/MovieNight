@@ -78,8 +78,6 @@ class MovieResultsDetailViewController: UIViewController {
     @IBAction func finshPressed(sender: UIButton) {
         let homeViewController = navigationController?.viewControllers[0] as! HomeViewController
         homeViewController.movieChoice.resetChoices()
-        homeViewController.user1Selections = []
-        homeViewController.user2Selections = []
         
         if let navController = navigationController {
             navController.popToRootViewController(animated: true)

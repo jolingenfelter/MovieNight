@@ -15,11 +15,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var user2Button: UIButton!
     @IBOutlet weak var viewResultsButton: UIButton!
     
-    // MARK: Variables
-    var user1Selections: [Movie] = []
-    var user2Selections: [Movie] = []
-    
     let movieChoice = MovieChoice()
+    
+    var completedMovieList: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +48,7 @@ class HomeViewController: UIViewController {
         
         if movieChoice.user1.hasChosen == true {
             
-           presentAlertWithOptions(for: 1)
+           presentAlertWithOptions(forUser: movieChoice.user1)
             
         } else {
            
@@ -66,7 +64,7 @@ class HomeViewController: UIViewController {
         
         if movieChoice.user2.hasChosen == true {
             
-            presentAlertWithOptions(for: 2)
+            presentAlertWithOptions(forUser: movieChoice.user2)
             
         } else {
             
@@ -85,8 +83,7 @@ class HomeViewController: UIViewController {
         movieChoice.resetChoices()
         updateButtonImage(movieChoice.user1)
         updateButtonImage(movieChoice.user2)
-        user1Selections = []
-        user2Selections = []
+        
     }
     
     @IBAction func viewResults(sender: UIButton) {
@@ -95,8 +92,7 @@ class HomeViewController: UIViewController {
             
             let resultsListViewController = storyboard?.instantiateViewController(withIdentifier: "MovieResultsListViewController") as! MovieResultsListViewController
             
-            resultsListViewController.resultsList.append(contentsOf: user1Selections)
-            resultsListViewController.resultsList.append(contentsOf: user2Selections)
+            resultsListViewController.resultsList.append(contentsOf: completedMovieList)
             
             self.navigationController?.pushViewController(resultsListViewController, animated: true)
             
@@ -110,18 +106,18 @@ class HomeViewController: UIViewController {
     
     // MARK: Alert for reselecting
     
-    func presentAlertWithOptions(for userNumber: Int) {
+    func presentAlertWithOptions(forUser user: User) {
         
         let genresListViewController = storyboard?.instantiateViewController(withIdentifier: "GenresListViewController") as! GenresListViewController
         
         let alert = UIAlertController(title: "Whoops!", message: "You have already made your selections.  Are you sure you want to start over?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
             
-            if userNumber == 1 {
-                self.user1Selections = []
+            if user.userNumber == 1 {
+                self.movieChoice.user1.choices = []
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
-            } else if userNumber == 2 {
-                self.user2Selections = []
+            } else {
+                self.movieChoice.user2.choices = []
                 self.navigationController?.pushViewController(genresListViewController, animated: true)
             }
             
@@ -136,30 +132,43 @@ class HomeViewController: UIViewController {
     }
     
     func updateButtonImage(_ user: User) {
-        if !user.hasChosen {
-            user1Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
-        } else {
-            user2Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
+        
+        switch user.userNumber {
+        case 1:
+            
+            if !user.hasChosen {
+               user1Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
+            } else {
+                user1Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
+            }
+            
+        case 2:
+            
+            if !user.hasChosen {
+                user2Button.setImage(UIImage(named: "bubble-empty"), for: .normal)
+            } else {
+                user2Button.setImage(UIImage(named: "bubble-selected"), for: .normal)
+            }
+            
+        default:
+            break
         }
+        
     }
 
 }
 
 extension HomeViewController: MovieChoiceDelegate {
     
-    func didChoose(user: User) {
+    func didChoose(user: User, movies: [Movie]) {
         
         updateButtonImage(user)
         
-    }
-    
-    func didCancelChoice(user: User) {
-        
-        updateButtonImage(user)
     }
     
     func choosingIsComplete() {
         viewResultsButton.isEnabled = true
+        completedMovieList = movieChoice.completeChoicesList
     }
     
 }

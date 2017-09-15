@@ -13,6 +13,7 @@ class User {
     var userNumber: Int
     var isChoosing = false
     var hasChosen = false
+    var choices: [Movie] = []
     
     init(userNumber: Int) {
         self.userNumber = userNumber

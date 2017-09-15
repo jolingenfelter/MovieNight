@@ -10,7 +10,7 @@ import Foundation
 
 protocol MovieChoiceDelegate {
     
-    func didChoose(user: User)
+    func didChoose(user: User, movies: [Movie])
     func choosingIsComplete()
     
 }
@@ -22,6 +22,13 @@ class MovieChoice {
     
     var choicesComplete: Bool {
         return user1.hasChosen == true && user2.hasChosen == true
+    }
+    
+    var completeChoicesList: [Movie] {
+        var array: [Movie] = []
+        array.append(contentsOf: user1.choices)
+        array.append(contentsOf: user2.choices)
+        return array
     }
     
     var delegate: MovieChoiceDelegate?
@@ -39,13 +46,13 @@ class MovieChoice {
     func user1DidChoose() {
         user1.isChoosing = false
         user1.hasChosen = true
-        delegate?.didChoose(user: user1)
+        delegate?.didChoose(user: user1, movies: user1.choices)
     }
     
     func user2DidChoose() {
         user2.isChoosing = false
         user2.hasChosen = true
-        delegate?.didChoose(user: user2)
+        delegate?.didChoose(user: user2, movies: user2.choices)
     }
     
     func choosingIsComplete() {
@@ -55,6 +62,8 @@ class MovieChoice {
     func resetChoices() {
         user1.hasChosen = false
         user2.hasChosen = false
+        user1.choices.removeAll()
+        user2.choices.removeAll()
     }
     
 }
