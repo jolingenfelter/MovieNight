@@ -77,7 +77,6 @@ class MovieResultsDetailViewController: UIViewController {
 
     @IBAction func finshPressed(sender: UIButton) {
         let homeViewController = navigationController?.viewControllers[0] as! HomeViewController
-        homeViewController.movieChoice.resetChoices()
         homeViewController.movieChoice.delegate?.resetChoices()
         
         if let navController = navigationController {

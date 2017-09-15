@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MoviesListViewController: UIViewController {
     
     // MARK: Variables
     var genresArray: [Genre]?
@@ -53,7 +53,144 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     }
     
-    // MARK: Navbar Setup
+    // MARK: MovieClient
+    
+    func fetchMovies() {
+        
+        guard let genresArray = genresArray else {
+            return
+        }
+        
+        var unsortedMoviesArray: [Movie] = []
+        
+        for genre in genresArray {
+            movieClient.fetchMoviesWithGenre(withQuery: genre.id, completion: { (result) in
+                switch result {
+                case .success(let movies):
+                    
+                    unsortedMoviesArray.append(contentsOf: movies)
+                    let dedupedArray = unsortedMoviesArray.uniqueElements
+                    let sortedArray = dedupedArray.sorted { $0.title! < $1.title! }
+                    self.moviesArray = sortedArray
+                    
+                    self.tableView.reloadData()
+                
+                case .failure(let error): print(error)
+                    
+                }
+            })
+        }
+        
+    }
+    
+    
+    // MARK: Connection Loss
+    
+    func connectionErrorAlert() {
+        let alert = UIAlertController(title: "No Connection", message: "Movie Night requires a network connection", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            if let navController = self.navigationController {
+                navController.popToRootViewController(animated: true)
+            }
+        }
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+}
+
+// MARK: - TableView
+
+extension MoviesListViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        guard let moviesArray = moviesArray else {
+            return 0
+        }
+        
+        return moviesArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieTableViewCell
+        
+        if let moviesArray = moviesArray {
+            let movie = moviesArray[indexPath.row]
+            cell.movieLabel.text = movie.title
+            
+            // Get MoviePoster
+            if let moviePosterURL = movie.moviePosterURL {
+                let imageGetter = ImageGetter(urlString: moviePosterURL)
+                imageGetter.getImage(completion: { (image) in
+                    
+                    DispatchQueue.main.async {
+                        
+                        cell.movieImage.image = image
+                        
+                    }
+                    
+                })
+            }
+            
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if numberSelected >= 5 {
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            displayAlert(with: "Whoopsie!", and: "You have already selected 5 movies!")
+            
+        } else {
+            
+            guard let moviesArray = moviesArray else {
+                return
+            }
+            
+            let movie = moviesArray[indexPath.row]
+            selectedMoviesArray.append(movie)
+            numberSelected += 1
+            numberSelectedLabel.text = "\(numberSelected)/5 selected"
+            
+        }
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        guard let moviesArray = moviesArray else {
+            return
+        }
+        
+        let movie = moviesArray[indexPath.row]
+        
+        if let movieIndex = selectedMoviesArray.index(where: {$0.title == movie.title}) {
+            selectedMoviesArray.remove(at: movieIndex)
+        }
+        
+        numberSelected -= 1
+        numberSelectedLabel.text = "\(numberSelected)/5 selected"
+        
+    }
+
+    
+}
+
+// MARK: - Navigation 
+
+extension MoviesListViewController {
+
     
     func navBarSetup() {
         self.navigationItem.title = "Select Movies"
@@ -112,131 +249,4 @@ class MoviesListViewController: UIViewController, UITableViewDelegate, UITableVi
             navController.popViewController(animated: true)
         }
     }
-    
-    // MARK: MovieClient
-    
-    func fetchMovies() {
-        
-        guard let genresArray = genresArray else {
-            return
-        }
-        
-        var unsortedMoviesArray: [Movie] = []
-        
-        for genre in genresArray {
-            movieClient.fetchMoviesWithGenre(withQuery: genre.id, completion: { (result) in
-                switch result {
-                case .success(let movies):
-                    
-                    unsortedMoviesArray.append(contentsOf: movies)
-                    let dedupedArray = unsortedMoviesArray.uniqueElements
-                    let sortedArray = dedupedArray.sorted { $0.title! < $1.title! }
-                    self.moviesArray = sortedArray
-                    
-                    self.tableView.reloadData()
-                
-                case .failure(let error): print(error)
-                    
-                }
-            })
-        }
-        
-    }
-    
-    // MARK: TableView
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        guard let moviesArray = moviesArray else {
-            return 0
-        }
-        
-        return moviesArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell") as! MovieTableViewCell
-        
-        if let moviesArray = moviesArray {
-            let movie = moviesArray[indexPath.row]
-            cell.movieLabel.text = movie.title
-            
-            // Get MoviePoster
-            if let moviePosterURL = movie.moviePosterURL {
-                let imageGetter = ImageGetter(urlString: moviePosterURL)
-                imageGetter.getImage(completion: { (image) in
-                    
-                    DispatchQueue.main.async {
-                       
-                        cell.movieImage.image = image
-                        
-                    }
-                    
-                })
-            }
-            
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if numberSelected >= 5 {
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            displayAlert(with: "Whoopsie!", and: "You have already selected 5 movies!")
-            
-        } else {
-            
-            guard let moviesArray = moviesArray else {
-                return
-            }
-            
-            let movie = moviesArray[indexPath.row]
-            selectedMoviesArray.append(movie)
-            numberSelected += 1
-            numberSelectedLabel.text = "\(numberSelected)/5 selected"
-            
-        }
-
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-        guard let moviesArray = moviesArray else {
-            return
-        }
-        
-        let movie = moviesArray[indexPath.row]
-        
-        if let movieIndex = selectedMoviesArray.index(where: {$0.title == movie.title}) {
-            selectedMoviesArray.remove(at: movieIndex)
-        }
-        
-        numberSelected -= 1
-        numberSelectedLabel.text = "\(numberSelected)/5 selected"
-        
-    }
-    
-    // MARK: Connection Loss
-    
-    func connectionErrorAlert() {
-        let alert = UIAlertController(title: "No Connection", message: "Movie Night requires a network connection", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
-            if let navController = self.navigationController {
-                navController.popToRootViewController(animated: true)
-            }
-        }
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-
 }

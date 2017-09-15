@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
         viewResultsButton.layer.masksToBounds = true
         viewResultsButton.layer.cornerRadius = 5
         viewResultsButton.isEnabled = false
+        viewResultsButton.alpha = 0.75
         
     }
     
@@ -75,27 +76,26 @@ class HomeViewController: UIViewController {
     
     @IBAction func resetSelections(sender: UIBarButtonItem) {
         
+        resetAll()
+        
+    }
+    
+    func resetAll() {
         movieChoice.resetChoices()
+        completedMovieList.removeAll()
         updateButtonImage(movieChoice.user1)
         updateButtonImage(movieChoice.user2)
-        
+        viewResultsButton.isEnabled = false
+        viewResultsButton.alpha = 0.75
     }
     
     @IBAction func viewResults(sender: UIButton) {
         
-        if movieChoice.choicesComplete == true {
-            
-            let resultsListViewController = storyboard?.instantiateViewController(withIdentifier: "MovieResultsListViewController") as! MovieResultsListViewController
-            
-            resultsListViewController.resultsList.append(contentsOf: completedMovieList)
-            
-            self.navigationController?.pushViewController(resultsListViewController, animated: true)
-            
-        } else {
-            
-            displayAlert(with: "Whoopsi!", and: "Both users must make selections before you can view the results.")
-            
-        }
+        let resultsListViewController = storyboard?.instantiateViewController(withIdentifier: "MovieResultsListViewController") as! MovieResultsListViewController
+        
+        resultsListViewController.resultsList.append(contentsOf: completedMovieList)
+        
+        self.navigationController?.pushViewController(resultsListViewController, animated: true)
         
     }
     
@@ -163,24 +163,12 @@ extension HomeViewController: MovieChoiceDelegate {
     
     func choosingIsComplete() {
         viewResultsButton.isEnabled = true
+        viewResultsButton.alpha = 1
         completedMovieList = movieChoice.completeChoicesList
     }
     
     func resetChoices() {
-        updateButtonImage(movieChoice.user1)
-        updateButtonImage(movieChoice.user2)
+        resetAll()
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-

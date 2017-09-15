@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenresListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GenresListViewController: UIViewController {
     
     // MARK: Variables
     let movieClient = MovieClient()
@@ -40,27 +40,6 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ConnectionError"), object: nil)
-    }
-    
-    // MARK: NavigationBar
-    
-    func navBarSetup() {
-        self.navigationItem.title = "Select Genres"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPressed))
-        nextButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
-        self.navigationItem.rightBarButtonItem = nextButton
-        let backButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backPressed))
-        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.leftBarButtonItem = backButton
-    }
-    
-    func backPressed() {
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
-        }
-
     }
     
     func nextPressed() {
@@ -98,6 +77,26 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
+    
+    // MARK: Connection Loss
+    
+    func connectionErrorAlert() {
+        let alert = UIAlertController(title: "No Connection", message: "Movie Night requires a network connection", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
+            if let navController = self.navigationController {
+                navController.popToRootViewController(animated: true)
+            }
+        }
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - TableView
+
+extension GenresListViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: TableView
     
@@ -149,7 +148,7 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-       
+        
         guard let genresArray = genresArray else {
             return
         }
@@ -163,18 +162,29 @@ class GenresListViewController: UIViewController, UITableViewDelegate, UITableVi
         numberSelectedLabel.text = "\(numberSelected)/5 selected"
     }
     
-    // MARK: Connection Loss
+}
+
+// MARK: - Navigation 
+
+extension GenresListViewController {
     
-    func connectionErrorAlert() {
-        let alert = UIAlertController(title: "No Connection", message: "Movie Night requires a network connection", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
-            if let navController = self.navigationController {
-                navController.popToRootViewController(animated: true)
-            }
+    func navBarSetup() {
+        self.navigationItem.title = "Select Genres"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPressed))
+        nextButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        self.navigationItem.rightBarButtonItem = nextButton
+        let backButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backPressed))
+        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func backPressed() {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
         }
         
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
     
 }
