@@ -152,10 +152,8 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: MovieChoiceDelegate {
     
-    func didChoose(user: User, movies: [Movie]) {
-        
+    func didChoose(user: User) {
         updateButtonImage(user)
-        
     }
     
     func choosingIsComplete() {
