@@ -43,7 +43,7 @@
 		9E96ACD11E32698700ABC59D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9E96ACD41E32698700ABC59D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E96ACD91E32698700ABC59D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9E96ACDB1E32698700ABC59D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = MovieNight/Info.plist; sourceTree = "<group>"; };
+		9E96ACDB1E32698700ABC59D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EA8C1981E37A55300E6D231 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		9EA8C19A1E37AC2D00E6D231 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		9EB2FC8F1F6B0ED000442174 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Genre.swift; path = ../Genre.swift; sourceTree = "<group>"; };
@@ -71,8 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				9E96ACCE1E32698700ABC59D /* MovieNight */,
-				9EB2FC971F6B119100442174 /* Views */,
-				9E96ACDB1E32698700ABC59D /* Info.plist */,
 				9EB8F01A1E36D4D700178420 /* Assets.xcassets */,
 				9E96ACCD1E32698700ABC59D /* Products */,
 			);
@@ -94,6 +92,8 @@
 				9EB2FC8E1F6B0EB500442174 /* Models */,
 				9EB2FC911F6B0F5F00442174 /* Helpers */,
 				9EB8F0171E36C1D500178420 /* API Client */,
+				9EB2FC971F6B119100442174 /* Views */,
+				9E96ACDB1E32698700ABC59D /* Info.plist */,
 			);
 			path = MovieNight;
 			sourceTree = "<group>";
@@ -141,7 +141,6 @@
 				9E96ACD81E32698700ABC59D /* LaunchScreen.storyboard */,
 			);
 			name = Views;
-			path = MovieNight;
 			sourceTree = "<group>";
 		};
 		9EB8F0171E36C1D500178420 /* API Client */ = {
