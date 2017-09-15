@@ -17,8 +17,6 @@ class HomeViewController: UIViewController {
     
     let movieChoice = MovieChoice()
     
-    var completedMovieList: [Movie] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,7 +80,6 @@ class HomeViewController: UIViewController {
     
     func resetAll() {
         movieChoice.resetChoices()
-        completedMovieList.removeAll()
         updateButtonImage(movieChoice.user1)
         updateButtonImage(movieChoice.user2)
         viewResultsButton.isEnabled = false
@@ -93,7 +90,7 @@ class HomeViewController: UIViewController {
         
         let resultsListViewController = storyboard?.instantiateViewController(withIdentifier: "MovieResultsListViewController") as! MovieResultsListViewController
         
-        resultsListViewController.resultsList.append(contentsOf: completedMovieList)
+        resultsListViewController.resultsList.append(contentsOf: movieChoice.completeChoicesList)
         
         self.navigationController?.pushViewController(resultsListViewController, animated: true)
         
@@ -164,7 +161,6 @@ extension HomeViewController: MovieChoiceDelegate {
     func choosingIsComplete() {
         viewResultsButton.isEnabled = true
         viewResultsButton.alpha = 1
-        completedMovieList = movieChoice.completeChoicesList
     }
     
     func resetChoices() {
