@@ -44,15 +44,17 @@ class MovieChoice {
         user2.isChoosing = true
     }
     
-    func user1DidChoose() {
+    func user1DidChoose(movies: [Movie]) {
         user1.isChoosing = false
         user1.hasChosen = true
+        user1.choices = movies
         delegate?.didChoose(user: user1)
     }
     
-    func user2DidChoose() {
+    func user2DidChoose(movies: [Movie]) {
         user2.isChoosing = false
         user2.hasChosen = true
+        user2.choices = movies
         delegate?.didChoose(user: user2)
     }
     

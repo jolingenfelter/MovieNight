@@ -226,13 +226,11 @@ extension MoviesListViewController {
                 let movieChoice = homeVC.movieChoice
                 
                 if  movieChoice.user1.isChoosing {
-                    movieChoice.user1DidChoose()
-                    movieChoice.user1.choices = selectedMoviesArray
+                    movieChoice.user1DidChoose(movies: selectedMoviesArray)
                 }
                 
                 if movieChoice.user2.isChoosing {
-                    movieChoice.user2DidChoose()
-                    movieChoice.user2.choices = selectedMoviesArray
+                    movieChoice.user2DidChoose(movies: selectedMoviesArray)
                 }
                 
                 if movieChoice.choicesComplete {
