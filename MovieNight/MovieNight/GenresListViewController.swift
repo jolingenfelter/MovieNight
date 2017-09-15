@@ -19,6 +19,11 @@ class GenresListViewController: UIViewController {
     // MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var numberSelectedLabel: UILabel!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        numberSelectedLabel.text = "\(numberSelected)/5 selected"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +37,6 @@ class GenresListViewController: UIViewController {
         
         // Observers
         NotificationCenter.default.addObserver(self, selector: #selector(connectionErrorAlert), name: NSNotification.Name(rawValue: "ConnectionError"), object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        numberSelectedLabel.text = "\(numberSelected)/5 selected"
     }
     
     deinit {

@@ -22,6 +22,11 @@ class MoviesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchMovies()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navBarSetup()
@@ -36,11 +41,6 @@ class MoviesListViewController: UIViewController {
         // Observers
         NotificationCenter.default.addObserver(self, selector: #selector(connectionErrorAlert), name: NSNotification.Name(rawValue: "ConnectionError"), object: nil)
     
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        fetchMovies()
     }
     
     deinit {

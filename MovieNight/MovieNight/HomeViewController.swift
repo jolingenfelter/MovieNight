@@ -28,11 +28,6 @@ class HomeViewController: UIViewController {
         viewResultsButton.alpha = 0.75
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        //updateButtonImages()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
