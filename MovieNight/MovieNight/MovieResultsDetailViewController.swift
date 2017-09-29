@@ -30,14 +30,14 @@ class MovieResultsDetailViewController: UIViewController {
     
     func navBarSetup() {
         self.navigationItem.title = "Results"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         let backButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backPressed))
-        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        backButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         if let navController = navigationController {
             navController.popViewController(animated: true)
         }
@@ -64,7 +64,11 @@ class MovieResultsDetailViewController: UIViewController {
         if let moviePosterURL = movie.moviePosterURL {
             let imageGetter = ImageGetter(urlString: moviePosterURL)
             imageGetter.getImage(completion: { (image) in
-                self.moviePosterImageView.image = image
+                
+                DispatchQueue.main.async {
+                    self.moviePosterImageView.image = image
+                }
+    
             })
         }
     }

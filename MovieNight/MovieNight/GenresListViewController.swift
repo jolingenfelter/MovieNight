@@ -43,7 +43,7 @@ class GenresListViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ConnectionError"), object: nil)
     }
     
-    func nextPressed() {
+    @objc func nextPressed() {
         let moviesListViewController = storyboard?.instantiateViewController(withIdentifier: "MoviesListViewController") as! MoviesListViewController
         moviesListViewController.genresArray = selectedGenresArray
         
@@ -81,7 +81,7 @@ class GenresListViewController: UIViewController {
     
     // MARK: Connection Loss
     
-    func connectionErrorAlert() {
+    @objc func connectionErrorAlert() {
         let alert = UIAlertController(title: "No Connection", message: "Movie Night requires a network connection", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
             if let navController = self.navigationController {
@@ -171,17 +171,17 @@ extension GenresListViewController {
     
     func navBarSetup() {
         self.navigationItem.title = "Select Genres"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextPressed))
-        nextButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        nextButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         self.navigationItem.rightBarButtonItem = nextButton
         let backButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backPressed))
-        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        backButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }

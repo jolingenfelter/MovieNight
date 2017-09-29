@@ -86,7 +86,7 @@ class MoviesListViewController: UIViewController {
     
     // MARK: Connection Loss
     
-    func connectionErrorAlert() {
+    @objc func connectionErrorAlert() {
         let alert = UIAlertController(title: "No Connection", message: "Movie Night requires a network connection", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
             if let navController = self.navigationController {
@@ -194,17 +194,17 @@ extension MoviesListViewController {
     
     func navBarSetup() {
         self.navigationItem.title = "Select Movies"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        doneButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        doneButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         self.navigationItem.rightBarButtonItem = doneButton
         let backButton = UIBarButtonItem(title: "< Genres", style: .plain, target: self, action: #selector(backPressed))
-        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        backButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func donePressed() {
+    @objc func donePressed() {
         
         if let navController = self.navigationController {
             
@@ -242,7 +242,7 @@ extension MoviesListViewController {
         }
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }

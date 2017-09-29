@@ -40,14 +40,14 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
     
     func navBarSetup() {
         self.navigationItem.title = "Results"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         let backButton = UIBarButtonItem(title: "< Back", style: .plain, target: self, action: #selector(backPressed))
-        backButton.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        backButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func backPressed() {
+    @objc func backPressed() {
         if let navController = navigationController {
             navController.popViewController(animated: true)
         }
