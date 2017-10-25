@@ -63,14 +63,14 @@ class GenresListViewController: UIViewController {
     
     func fetchGenres() {
         
-        movieClient.fetchGenres { (result) in
+        movieClient.fetchGenres { [weak self] (result) in
             
             switch result {
                 
                 case .success(let genres):
-                    self.genresArray = genres
-                    self.tableView.reloadData()
-                
+                    
+                    self?.genresArray = genres
+                    self?.tableView.reloadData()
                 
                 case .failure(let error): print(error.localizedDescription)
                 

@@ -105,6 +105,5 @@ class MovieResultsListViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
 
 }
